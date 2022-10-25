@@ -15,6 +15,7 @@ class Client(commands.Bot):
         for filename in os.listdir(cogs_folder):
             if filename.endswith(".py"):
                 await client.load_extension(f"cogs.{filename[:-3]}")
+        await client.tree.sync()
 
 client = Client()
 client.run(os.getenv("TOKEN"))
