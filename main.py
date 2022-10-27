@@ -11,11 +11,13 @@ class Client(commands.Bot):
         )
     
     async def setup_hook(self): #overwriting a handler
-        cogs_folder = f"{os.path.dirname(__file__)}/cogs"
+        print(f"\033[31mLogged in as {client.user}\033[39m")
+        cogs_folder = f"{os.path.abspath(os.path.dirname(__file__))}/cogs"
         for filename in os.listdir(cogs_folder):
             if filename.endswith(".py"):
                 await client.load_extension(f"cogs.{filename[:-3]}")
         await client.tree.sync()
+        print("Loaded cogs")
 
 client = Client()
 client.run(os.getenv("TOKEN"))
